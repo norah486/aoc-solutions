@@ -14,7 +14,7 @@ async function part1() {
     const all_coords = new Map<string, number[][]>();
     grid.forEach((l, y) => {
         l.forEach((c, x) => {
-            if (c === "." || !c) {}
+            if (c === "." || !c) return;
             else if (all_coords.has(c)) {
                 all_coords.get(c)?.push([x, y]);
             } else {
@@ -88,7 +88,7 @@ async function part2() {
     const all_coords = new Map<string, number[][]>();
     grid.forEach((l, y) => {
         l.forEach((c, x) => {
-            if (c === "." || !c) {}
+            if (c === "." || !c) return;
             else if (all_coords.has(c)) {
                 all_coords.get(c)?.push([x, y]);
             } else {
