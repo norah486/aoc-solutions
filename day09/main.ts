@@ -11,9 +11,9 @@ async function part1() {
         if (line) full = line;
     }
 
-    let converted: string[] = [];
+    const converted: string[] = [];
     let id = 0;
-    const ids = new Map<number, number>();
+    // const ids = new Map<number, number>();
 
     for (let i = 0; i < full.length; i++) {
         // if (i % 2 !== 0) converted += ".".repeat(Number(full[i]));
