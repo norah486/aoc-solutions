@@ -42,7 +42,6 @@ async function part1() {
 
     let sum = 0;
     for (let i = 0; i < conv_num.length; i++) {
-        // console.log(conv_num);
         sum += i * Number(conv_num[i]);
     }
     return sum;
