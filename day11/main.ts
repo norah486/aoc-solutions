@@ -45,13 +45,12 @@ async function part1() {
         }
     }
 
-    console.log(updated_stones.length);
+    return updated_stones.length;
 }
 
 async function part2() {
     const rl = readByLine(path);
 
-    // const stones: number[] = [];
     let stones = new Map<number, number>();
     let unique_stones = new Set<number>();
     for await (const line of rl) {
@@ -110,37 +109,31 @@ async function part2() {
         });
         stones = stoner;
         unique_stones = store;
-
-        // let sum = 0;
-        // stones.forEach((v) => sum += v);
-        // console.log(`${i + 1} \t- ${sum}`);
     }
 
-    // console.log(stones);
     let sum = 0;
     stones.forEach((v) => sum += v);
-    console.log(sum);
-}
-/*
-// console.log(stones);
-
-let updated_stones: string[] = [...stones.map((v) => v.toString())];
-for (let i = 0; i < 75; i++) {
-    updated_stones = updated_stones.flatMap((x) => {
-        if (x === "0") return x = "1";
-        else if (x.length % 2 === 0) {
-            return [
-                `${Number(x.slice(0, x.length / 2))}`,
-                `${Number(x.slice(x.length / 2, x.length))}`,
-            ];
-        } else return (Number(x) * 2024).toString();
-    });
-
-    // updated_stones = updated_stones.flatMap((i) => i.split(";"));
-
-    // console.log(updated_stones);
-    console.log(`${i + 1}/25`);
+    return sum;
 }
 
-console.log(updated_stones.length);
-*/
+Deno.bench({
+    name: "Part 1",
+    fn: async () => {
+        await part1();
+    },
+});
+
+Deno.bench({
+    name: "Part 2",
+    fn: async () => {
+        await part2();
+    },
+});
+
+Deno.bench({
+    name: "Both",
+    fn: async () => {
+        await part1();
+        await part2();
+    },
+});
