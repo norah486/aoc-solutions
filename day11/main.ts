@@ -13,8 +13,6 @@ async function part1() {
         }
     }
 
-    // console.log(stones);
-
     const updated_stones: string[] = [...stones.map((v) => v.toString())];
     for (let i = 0; i < 25; i++) {
         updated_stones.forEach((stone, j) => {
