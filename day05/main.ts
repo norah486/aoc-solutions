@@ -46,13 +46,12 @@ function part1() {
 	console.log(sum);
 }
 
-const _sum = 0;
-
-for (const steps of steps_c) {
+function isValid(
+	steps: string[],
+): { valid: boolean; broken_rules: string[][] } {
 	let valid = true;
 	const printed_numbers: string[] = [];
 	const broken_rules: string[][] = [];
-	const _test: string[] = [];
 	steps.forEach((step) => {
 		const values = rules.filter((v) => v.at(1) === step.toString());
 		if (values) {
@@ -68,8 +67,35 @@ for (const steps of steps_c) {
 		}
 		printed_numbers.push(step);
 	});
-	if (!valid) {
-		console.log(steps);
-		console.log(broken_rules);
-	}
+	return { valid, broken_rules };
 }
+
+let sum = 0;
+let i = 0;
+for (const steps of steps_c) {
+	let { valid, broken_rules } = isValid(steps);
+
+	const copy = [...steps];
+	while (!valid) {
+		for (const br_rule of broken_rules) {
+			const a = copy.findIndex((s) => s === br_rule.at(0));
+			const b = copy.findIndex((s) => s === br_rule.at(1));
+
+			copy[a] = br_rule.at(1)!;
+			copy[b] = br_rule.at(0)!;
+		}
+
+		valid = isValid(copy).valid;
+
+		console.log(copy, broken_rules, valid);
+
+		if (valid) {
+			const number = [findMiddleElements(copy)];
+			sum += Number(number);
+		}
+	}
+	// console.log(i);
+	i += 1;
+}
+
+console.log(sum);
